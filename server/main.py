@@ -1,12 +1,15 @@
 import os
-# import magic
-import urllib.request
+
 from app import app
-from flask import Flask, flash, request, redirect, render_template
+from flask import flash, redirect
 from werkzeug.utils import secure_filename
-from flask import Flask, request, render_template, send_from_directory
+from flask import request, render_template, send_from_directory
+
+from Unet import Unet
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+unet = Unet()
 
 
 def allowed_file(filename):
@@ -33,7 +36,10 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File successfully uploaded')
-            return redirect('/')
+            unet.predict(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            return render_template('complete_display_image.html', image_name=filename)
+
         else:
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
             return redirect(request.url)
@@ -41,7 +47,7 @@ def upload_file():
 
 @app.route('/upload/<filename>')
 def send_image(filename):
-    return send_from_directory("dataset_bow-legs", filename)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 if __name__ == "__main__":

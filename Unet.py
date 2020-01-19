@@ -40,7 +40,7 @@ def masked(img, gt, mask, alpha=1):
 def load_imgs(im_names, im_shape):
     X = []
     for im_name in im_names:
-        img = io.imread(im_name)
+        img = io.imread(im_name,  as_gray=True)
         img = transform.resize(img, im_shape, mode='constant')
         img = np.expand_dims(img, -1)
         X.append(img)
@@ -102,6 +102,6 @@ class Unet(object):
 
 
 if __name__ == '__main__':
-    file_path = "dataset_bow-legs/mask_050/!002115_2.png"
+    file_path = "server/dataset_bow-legs/002115_.png"
     unet = Unet()
     unet.predict(file_path)

@@ -5,7 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-Uploaded
-<img src=" {{url_for('send_image', filename=image_name)}}">
+<form method="get" action="/">
+    <button type="submit">Go back</button>
+</form>
+<div>
+</div>
+
+<div class="container" style="width:100%;">
+    <div class="row">
+        <div class="col-md-6">
+            <img src=" {{url_for('send_image', filename=image_name)}}" width="256px" height="512" >
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 from flask import Flask
 
-UPLOAD_FOLDER = 'D:\Studies\9 Semester\Widzenie\project_bow-legs\server\dataset_bow-legs'
+UPLOAD_FOLDER = 'D:\Studies\9 Semester\Widzenie\MachineVision\server\dataset_bow-legs'
 
 app = Flask(__name__)
 app.secret_key = "secret key"
